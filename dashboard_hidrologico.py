@@ -49,8 +49,8 @@ HEADERS = {
 AUTOR = "Javier Sotelo"
 ROL = "Contador Público · Consultor en Business Intelligence"
 REDES = {                       # pegá las URL; las vacías no se muestran
-    "LinkedIn": "",
-    "Instagram": "",
+    "LinkedIn": "https://www.linkedin.com/in/javieralejandrosotelo/",
+    "Instagram": "https://www.instagram.com/cr.javiersotelo/",
     "Sitio web": "",
 }
 # Logo: guardá un archivo logo.png (o .svg / .jpg / .webp) junto a este script.
@@ -114,7 +114,7 @@ CATALOGO = pd.DataFrame([
     ("LA CRUZ",             "URUGUAY", -29.1750, -56.6333, 14.20, 10.00, 11.00),
     ("YAPEYÚ",              "URUGUAY", -29.4750, -56.8167, 13.50,  8.50,  9.50),
     ("PASO DE LOS LIBRES",  "URUGUAY", -29.7125, -57.0883, 13.20,  7.50,  8.50),
-    ("BONPLAND",            "URUGUAY", -29.9333, -57.4500, 11.80,  8.00,  9.00),
+    ("BOMPLAND",            "URUGUAY", -29.9333, -57.4500, 11.80,  8.00,  9.00),
     ("MONTE CASEROS",       "URUGUAY", -30.2520, -57.6360, 10.40,  7.50,  8.50),
     ("MOCORETÁ",            "URUGUAY", -30.6167, -57.9667,  9.50,  6.50,  7.50),
 ], columns=["Puerto", "Río", "Lat", "Lon", "Nivel_92", "Alerta_resp", "Evac_resp"])
