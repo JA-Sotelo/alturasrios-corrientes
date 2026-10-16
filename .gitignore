@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Streamlit: credenciales locales (nunca subir)
+.streamlit/secrets.toml
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Capturas de prueba
+vista_*.png
+tarjetas.png
+aviso_legal.png

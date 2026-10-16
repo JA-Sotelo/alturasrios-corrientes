@@ -1,0 +1,7 @@
+streamlit>=1.45
+pandas
+requests
+lxml
+folium
+streamlit-folium
+matplotlib
