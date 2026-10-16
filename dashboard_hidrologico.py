@@ -36,7 +36,7 @@ from streamlit_folium import st_folium
 # ============================================================================
 URL_PNA = "https://contenidosweb.prefecturanaval.gob.ar/alturas/"
 SNAPSHOT = Path(__file__).parent / "datos" / "alturas_pna.html"   # copia que publica actualizar_datos.py
-HORAS_COPIA_VIEJA = 6   # aviso si la copia tiene más antigüedad
+HORAS_COPIA_VIEJA = 13   # Prefectura publica 6, 12 y 18 h: el mayor intervalo es de 12 h
 TTL_SEGUNDOS = 60 * 60  # Prefectura actualiza pocas veces al día
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (dashboard-hidrologico-corrientes)",
@@ -554,9 +554,9 @@ if error_pna:
     st.sidebar.error(f"No se pudo leer Prefectura:\n\n{error_pna}")
 else:
     if origen_datos == "copia":
-        st.sidebar.caption(f"Copia de Prefectura del {hora_consulta} · se revisa cada {TTL_SEGUNDOS // 60} min.")
+        st.sidebar.caption(f"Copia de Prefectura del {hora_consulta} · Prefectura publica a las 6, 12 ó 18 hs.")
     else:
-        st.sidebar.caption(f"Consultado {hora_consulta} · se refresca cada {TTL_SEGUNDOS // 60} min.")
+        st.sidebar.caption(f"Consultado {hora_consulta} · Prefectura publica a las 6, 12 ó 18 hs.")
 
 faltantes = df.loc[df["Fuente"] == "Sin dato", "Puerto"].tolist()
 if faltantes and not error_pna:
