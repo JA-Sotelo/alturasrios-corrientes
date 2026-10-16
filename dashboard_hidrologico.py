@@ -545,8 +545,8 @@ if "overrides" not in st.session_state:
     st.session_state.overrides = {}
 
 st.sidebar.header("Datos")
-if st.sidebar.button("Actualizar datos", icon=":material/refresh:", width="stretch"):
-    cargar_pna.clear()
+#if st.sidebar.button("Actualizar datos", icon=":material/refresh:", width="stretch"):
+#    cargar_pna.clear()
 
 df, error_pna, hora_consulta, origen_datos = armar_datos()
 
