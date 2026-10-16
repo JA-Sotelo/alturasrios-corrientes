@@ -18,6 +18,26 @@ python -m pip install -r requirements.txt
 streamlit run dashboard_hidrologico.py
 ```
 
+## Actualización de datos en la versión publicada
+
+El sitio de Prefectura no acepta conexiones desde los servidores de Streamlit Cloud, que están fuera de Argentina. Por eso el tablero trabaja en dos niveles:
+
+1. **En vivo**: si puede, consulta a Prefectura directamente. Esto funciona al ejecutarlo en una computadora en Argentina.
+2. **Copia publicada**: si no puede, lee `datos/alturas_pna.html`, una copia que `actualizar_datos.py` sube al repositorio desde una PC en Argentina.
+
+El tablero indica en el panel lateral de dónde vienen los datos y avisa si la copia tiene más de 6 horas.
+
+### Programar la actualización (Windows)
+
+Copiá `Alturas PNA - Actualizacion.bat` al Escritorio y abrilo con doble clic. Desde su menú podés:
+
+1. **Activar la actualización automática cada hora** (crea una tarea en el Programador de tareas de Windows).
+2. **Actualizar ahora**.
+3. **Ver las últimas ejecuciones**.
+4. **Desactivar la actualización automática**.
+
+La tarea corre en segundo plano, sin abrir ventanas, mientras la PC esté encendida y con la sesión iniciada. El registro de cada ejecución queda en `datos/actualizar_datos.log`.
+
 ## Tecnologías
 
 Python · Streamlit · pandas · Folium

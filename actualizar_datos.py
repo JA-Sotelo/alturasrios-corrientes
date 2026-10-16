@@ -47,7 +47,10 @@ def tablas(html: str) -> str:
 
 
 def git(*args: str) -> None:
-    resultado = subprocess.run(["git", *args], cwd=CARPETA, capture_output=True, text=True)
+    resultado = subprocess.run(
+        ["git", *args], cwd=CARPETA, capture_output=True, text=True,
+        creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),  # sin ventanas al correr en segundo plano
+    )
     if resultado.returncode != 0:
         raise RuntimeError(f"git {' '.join(args)}: {resultado.stderr.strip() or resultado.stdout.strip()}")
 
