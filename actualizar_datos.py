@@ -41,18 +41,24 @@ def log(mensaje: str) -> None:
         f.write(linea + "\n")
 
 
+def normalizar(texto: str) -> str:
+    """Unifica los saltos de línea: Windows usa \\r\\n y Linux \\n; si no, parecen distintos."""
+    return texto.replace("\r\n", "\n").replace("\r", "\n")
+
+
 def tablas(html: str) -> str:
     """Solo las tablas: el resto de la página puede cambiar sin que cambien los datos."""
-    return "\n".join(re.findall(r"<table.*?</table>", html, flags=re.I | re.S))
+    return "\n".join(re.findall(r"<table.*?</table>", normalizar(html), flags=re.I | re.S))
 
 
-def git(*args: str) -> None:
+def git(*args: str) -> str:
     resultado = subprocess.run(
         ["git", *args], cwd=CARPETA, capture_output=True, text=True,
         creationflags=getattr(subprocess, "CREATE_NO_WINDOW", 0),  # sin ventanas al correr en segundo plano
     )
     if resultado.returncode != 0:
         raise RuntimeError(f"git {' '.join(args)}: {resultado.stderr.strip() or resultado.stdout.strip()}")
+    return resultado.stdout
 
 
 def main() -> int:
@@ -76,11 +82,16 @@ def main() -> int:
 
     ahora = datetime.now()
     DESTINO.parent.mkdir(exist_ok=True)
-    DESTINO.write_text(f"<!-- capturado: {ahora:%d/%m/%Y %H:%M} -->\n{html}", encoding="utf-8")
+    DESTINO.write_text(f"<!-- capturado: {ahora:%d/%m/%Y %H:%M} -->\n{normalizar(html)}",
+                       encoding="utf-8", newline="\n")
 
     try:
         git("pull", "--rebase", "--autostash")      # por si se editó algo desde la web de GitHub
-        git("add", str(DESTINO.relative_to(CARPETA)))
+        ruta = str(DESTINO.relative_to(CARPETA))
+        git("add", ruta)
+        if not git("status", "--porcelain", ruta).strip():
+            log("Sin cambios en los datos.")   # Git confirma que el contenido es el mismo
+            return 0
         git("commit", "-m", f"Datos PNA {ahora:%d/%m/%Y %H:%M}")
         git("push")
     except RuntimeError as e:
