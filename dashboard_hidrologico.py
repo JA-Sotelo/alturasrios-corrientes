@@ -887,12 +887,12 @@ seccion("Distancia a la referencia",
 c_ref, c_ord = st.columns(2)
 modo = c_ref.selectbox(
     "Comparar contra",
-    ["Nivel de alerta", "Nivel de evacuación", "Creciente de 1992 (máximo histórico)"],
+    ["Nivel de alerta", "Nivel de evacuación", "Creciente de 1992"],
 )
 col_ref, nombre_ref = {
     "Nivel de alerta": ("Alerta", "Alerta"),
     "Nivel de evacuación": ("Evacuacion", "Evacuación"),
-    "Creciente de 1992 (máximo histórico)": ("Nivel_92", "Pico '92"),
+    "Creciente de 1992": ("Nivel_92", "Pico '92"),
 }[modo]
 orden = c_ord.radio("Ordenar", ["Geográfico (aguas abajo)", "Variación más alta primero"], horizontal=True)
 
